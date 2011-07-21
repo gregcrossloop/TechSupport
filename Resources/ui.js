@@ -28,18 +28,6 @@
 		    window:winServiceShops
 		});
 		
-		var data = [];
-		for(var i in dacMobile.data.devices) {
-			var d = dacMobile.data.devices[i];
-			var children = d.compatList && d.compatList.length > 0;
-			data.push({
-				title : d.name,
-				hasChild : children,
-				id : d.id,
-				className : 'deviceRow'
-			});
-		}
-		
 		// generate compatibility tree
 		var tableview = Titanium.UI.createTableView({
 			data: [
@@ -53,7 +41,7 @@
 		// create table view event listener
 		tableview.addEventListener('click', function(e)
 		{
-			if (e.rowData.id && e.rowData.hasChild)
+			if (e.rowData.hasChild)
 			{
 				
 				var win = Titanium.UI.createWindow({
@@ -73,18 +61,26 @@
 				});
 				
 				win.add(tv);
-				Titanium.UI.currentTab.open(win,{animated:true});
+				tabHelpNow.open(win,{animated:true});
 			}
 		});
 		
-		// add table view to the window
-		winServiceShops.add(tableview);
+		// add table view to the window 
+		winHelpNow.add(tableview);
+		
+		// open service shops to a search page
+		
+		
+		var webview = Ti.UI.createWebView({});
+		webview.url = 'http://www.crossloop.com/search.htm';
+		
+		winServiceShops.add(webview);
 		
 		tabGroup.addTab(tabHelpNow);  
 		tabGroup.addTab(tabServiceShops);  
 		
 		// open tab group
-		tabGroup.setActiveTab(1);
+		tabGroup.setActiveTab(0);
 		tabGroup.open({
 			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 		});
