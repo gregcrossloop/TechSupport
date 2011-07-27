@@ -2,18 +2,18 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <deployment-targets>
         <target device="mobileweb">false</target>
-        <target device="iphone">false</target>
-        <target device="ipad">false</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
     <id>com.crossloop.techsupport</id>
-    <name>Tech Support</name>
+    <name>TechSupport</name>
     <version>1.0</version>
-    <publisher>Greg</publisher>
-    <url>http://</url>
+    <publisher>gregm</publisher>
+    <url>http://crossloop.com</url>
     <description>not specified</description>
-    <copyright>2011 by Greg</copyright>
+    <copyright>2011 by gregm</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -22,7 +22,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>a9eb8a59-776b-4869-9e7e-a0b4913ba8e0</guid>
+    <guid>c076b5a6-1156-4ef6-a542-fe75a7831902</guid>
 	<iphone>
 		<orientations device="iphone">
 			<orientation>Ti.UI.PORTRAIT</orientation>

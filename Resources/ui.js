@@ -8,31 +8,96 @@
 		// create tab group
 		var tabGroup = Titanium.UI.createTabGroup();
 
-		var winHelpNow = Titanium.UI.createWindow({  
+		xl.winHelpNow = Titanium.UI.createWindow({  
 		    title:'Get Help Now',
 		    className:'win'
 		});
-		var tabHelpNow = Titanium.UI.createTab({  
+		xl.tabHelpNow = Titanium.UI.createTab({  
 		    icon:'KS_nav_views.png',
 		    title:'Get Help Now',
-		    window:winHelpNow
+		    window:xl.winHelpNow
 		});
 
-		var winServiceShops = Titanium.UI.createWindow({  
+		xl.winServiceShops = Titanium.UI.createWindow({  
 		    title:'Service Shops',
 		    className:'win'
 		});
-		var tabServiceShops = Titanium.UI.createTab({  
+		xl.tabServiceShops = Titanium.UI.createTab({  
 		    icon:'KS_nav_ui.png',
 		    title:'Service Shops',
-		    window:winServiceShops
+		    window:xl.winServiceShops
+		});
+		
+
+		var b1 = Titanium.UI.createButton({
+			color:'#fff',
+			borderRadius:5,
+			borderWidth:0,
+			backgroundGradient:{
+				type:'linear',
+				colors:[{color:'#e9e9e9',position:0.0},{color:'#d2d2d2',position:0.50},{color:'#a9a9a9',position:1.0}]
+			},
+			top:80,
+			height:100,
+			width:300,
+			font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+			title:'My Computer'
+		});
+		
+		var i = Ti.UI.createImageView({
+			image: 'images/vista-my-computer-icon.png',
+			width: 80,
+			left: 20,
+			top: 0
+		});
+		b1.add(i);
+		var l = Ti.UI.createLabel({
+			text: 'My Computer',
+			font: {
+				fontSize: '22',
+				fontWeight: 'bold'
+			},
+			left: 120
+		});
+		b1.add(l);
+		xl.winHelpNow.add(b1);
+		
+		
+		b1.addEventListener('click', function(e) {
+			xl.openSolutionsTree('Computer');
+		});
+		
+		
+		
+		var webview = Ti.UI.createWebView({});
+		webview.url = 'http://www.crossloop.com/search.htm';
+		
+		xl.winServiceShops.add(webview);
+		
+		tabGroup.addTab(xl.tabHelpNow);  
+		tabGroup.addTab(xl.tabServiceShops);  
+		
+		// open tab group
+		tabGroup.setActiveTab(0);
+		tabGroup.open({
+			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
+		});
+	}
+	
+	xl.openSolutionsTree = function(category) {
+		var win = Titanium.UI.createWindow({
+			title:category
 		});
 		
 		// generate compatibility tree
 		var tableview = Titanium.UI.createTableView({
 			data: [
 				{
-					title: 'yo yo',
+					title: 'rad',
+					hasChild: true
+				},
+				{
+					title: 'even radder',
 					hasChild: true
 				}
 			]
@@ -61,28 +126,13 @@
 				});
 				
 				win.add(tv);
-				tabHelpNow.open(win,{animated:true});
+				//win.open({animated:true});
+				xl.tabHelpNow.open(win,{animated:true});
 			}
 		});
 		
-		// add table view to the window 
-		winHelpNow.add(tableview);
-		
-		// open service shops to a search page
-		
-		
-		var webview = Ti.UI.createWebView({});
-		webview.url = 'http://www.crossloop.com/search.htm';
-		
-		winServiceShops.add(webview);
-		
-		tabGroup.addTab(tabHelpNow);  
-		tabGroup.addTab(tabServiceShops);  
-		
-		// open tab group
-		tabGroup.setActiveTab(0);
-		tabGroup.open({
-			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-		});
+		// add table view to the window
+		win.add(tableview);
+		xl.tabHelpNow.open(win,{animated:true}); 
 	}
 })()
